@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:test_video_player/bloc/volume_bloc/volume_bloc.dart';
-import 'package:test_video_player/ui/ui_models/play_icon.dart';
+import 'package:test_video_player/ui/ui_models/entities_icon.dart';
 import 'package:test_video_player/ui/ui_models/video_models/video_nav.dart';
 import 'package:test_video_player/ui/ui_models/video_models/video_play.dart';
 import 'package:test_video_player/ui/ui_models/video_models/video_slider.dart';
@@ -35,16 +35,17 @@ class VideoPage extends StatelessWidget {
                     children: [
                       Expanded(child: VideoSlider()),
                       SizedBox(width: 12),
-                      PlayIcon(
+                      EntitiesIcon(
                         onPressed: () {
                           context.read<VolumeBloc>().add(VolumeEvent());
                         },
                         icon: state.isMuted
                             ? Icons.volume_off_rounded
                             : VideoPlayerIcons.volume,
+                        size: 14.77,
                       ),
                       SizedBox(width: 12),
-                      PlayIcon(
+                      EntitiesIcon(
                         onPressed: _goFullScreen,
                         icon: VideoPlayerIcons.bigscreen,
                       ),

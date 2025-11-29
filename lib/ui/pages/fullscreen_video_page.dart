@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:test_video_player/ui/ui_models/play_icon.dart';
+import 'package:test_video_player/ui/ui_models/entities_icon.dart';
 import 'package:test_video_player/ui/ui_models/video_models/video_nav.dart';
 import 'package:test_video_player/ui/ui_models/video_models/video_play.dart';
 import 'package:test_video_player/ui/ui_models/video_models/video_slider.dart';
@@ -37,12 +37,10 @@ class FullScreenVideoPage extends StatelessWidget {
                   children: [
                     Expanded(child: const VideoSlider()),
                     const SizedBox(width: 24),
-                    PlayIcon(
+                    EntitiesIcon(
                       onPressed: _goPortraitScreen,
                       icon: VideoPlayerIcons.diagonal,
                     ),
-
-                    // звук
                   ],
                 ),
               ),
