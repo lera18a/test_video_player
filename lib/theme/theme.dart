@@ -2,21 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 const primaryColorLight = Color(0X80E0E7FF);
-final backgroundColorLight = Colors.green[50];
 const textColorLight = Color(0xff131313);
-final scaffoldBackgroundColorLight = Colors.grey[50];
-final switchColorLight = Color(0xff73C0FC);
+final scaffoldBackgroundColorLight = Colors.white;
+const switchColorLight = Color(0xff73C0FC);
+const listViewColorLight = Color(0X0D000000);
 
-final primaryColorDark = Color(0X80E0E7FF);
-const backgroundColorDark = Color(0xFF191919);
+const primaryColorDark = Color(0x80E0E7FF);
 const textColorDark = Colors.white;
-final scaffoldBackgroundColorDark = Color(0xFF121212);
-final switchColorDark = Color(0xff004884);
+final scaffoldBackgroundColorDark = Color(0xFF191919);
+const switchColorDark = Color(0xff004884);
+const listViewColorDark = Color(0x0DFFFFFF);
 
 final lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: primaryColorLight,
-  scaffoldBackgroundColor: backgroundColorLight,
+  colorScheme: ColorScheme.light(
+    primary: Colors.black,
+    onPrimary: Colors.white,
+    surface: Colors.white,
+    onSurface: textColorLight,
+  ),
+  scaffoldBackgroundColor: scaffoldBackgroundColorLight,
+  cardColor: listViewColorLight,
+
+  primaryIconTheme: const IconThemeData(color: textColorLight),
   textTheme: GoogleFonts.robotoTextTheme().copyWith(
     bodyLarge: TextStyle(
       color: textColorLight,
@@ -45,7 +54,15 @@ final lightTheme = ThemeData(
 final darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: primaryColorDark,
-  scaffoldBackgroundColor: backgroundColorDark,
+  colorScheme: ColorScheme.dark(
+    primary: Colors.white,
+    onPrimary: Colors.black,
+    surface: Color(0xFF191919),
+    onSurface: textColorDark,
+  ),
+  scaffoldBackgroundColor: scaffoldBackgroundColorDark,
+  cardColor: listViewColorDark,
+
   textTheme: GoogleFonts.robotoTextTheme().copyWith(
     bodyLarge: TextStyle(
       color: textColorDark,
