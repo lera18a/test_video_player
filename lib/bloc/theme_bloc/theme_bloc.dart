@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'theme_event.dart';
 part 'theme_state.dart';
@@ -7,11 +6,7 @@ part 'theme_state.dart';
 class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ThemeBloc() : super(ThemeState(isDark: true)) {
     on<ToggleThemeEvent>(_onToggleThemeEvent);
-    // on<ThemeInitEvent>(_onThemeInitEvent);
   }
-
-  // final SharedPreferences prefs;
-  static const _themeKey = 'theme';
 
   Future<void> _onToggleThemeEvent(
     ToggleThemeEvent event,
@@ -19,12 +14,5 @@ class ThemeBloc extends Bloc<ThemeEvent, ThemeState> {
   ) async {
     final finalState = !state.isDark;
     emit(ThemeState(isDark: finalState));
-    // await prefs.setBool(_themeKey, finalState);
   }
-
-  // void _onThemeInitEvent(ThemeInitEvent event, Emitter<ThemeState> emit) {
-  //   final saved = prefs.getBool(_themeKey);
-  //   if (saved == null || saved == state.isLight) return;
-  //   emit(ThemeState(isLight: saved));
-  // }
 }
