@@ -6,31 +6,32 @@ import 'package:test_video_player/bloc/volume_bloc/volume_bloc.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlay extends StatelessWidget {
-  const VideoPlay({super.key});
+  const VideoPlay({super.key, required this.controller});
+
+  final VideoPlayerController? controller;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<VideoBloc, VideoState>(
-      builder: (context, state) {
-        if (state is VideoLoadingState) {
-          return Center(child: CircularProgressIndicator());
+    final volumeState = context.watch<VolumeBloc>().state;
+    return BlocListener<VideoBloc, VideoState>(
+      listener: (context, state) {
+        if (state is VideoPlayState && controller != null) {
+          if (state.onTap) {
+            controller!.play();
+          } else {
+            controller!.pause();
+          }
         }
-        if (state is VideoPlayState) {
-          final controller = state.controller;
-          final isMuted = context.watch<VolumeBloc>().state.isMuted;
-          controller.setVolume(isMuted ? 0.0 : 1.0);
-          return GestureDetector(
-            onTap: () {
-              context.read<VideoNavBloc>().add(ShowNavEvent());
-            },
-            child: AspectRatio(
-              aspectRatio: controller.value.aspectRatio,
-              child: VideoPlayer(controller),
-            ),
-          );
-        }
-        return Placeholder();
       },
+      child: GestureDetector(
+        onTap: () => context.read<VideoNavBloc>().add(ShowNavEvent()),
+        child: AspectRatio(
+          aspectRatio: controller!.value.aspectRatio,
+          child: VideoPlayer(
+            controller!..setVolume(volumeState.isMuted ? 0.0 : 1.0),
+          ),
+        ),
+      ),
     );
   }
 }
